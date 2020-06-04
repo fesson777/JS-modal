@@ -1,4 +1,4 @@
-const fruits = [
+let fruits = [
     {id: 1, title: 'Яблоки', price: 20, img: 'https://e1.edimdoma.ru/data/ingredients/0000/2374/2374-ed4_wide.jpg?1487746348'},
     {id: 2, title: 'Апельсины', price: 30, img: 'https://fashion-stil.ru/wp-content/uploads/2019/04/apelsin-ispaniya-kg-92383155888981_small6.jpg'},
     {id: 3, title: 'Манго', price: 40, img: 'https://itsfresh.ru/upload/iblock/178/178d8253202ef1c7af13bdbd67ce65cd.jpg'},
@@ -6,7 +6,7 @@ const fruits = [
 
 const toHTML = fruit => `
 <div class="col">
-    <div class="card">
+    <div class="card" style="width: 300px">
         <img style = "width: 100%" src="${fruit.img}" class="card-img-top" alt="${fruit.title}">
         <div class="card-body">
             <h5 class="card-title">${fruit.title}</h5>
@@ -19,7 +19,7 @@ const toHTML = fruit => `
 `
 
 function render() {
-    const html = fruits.map(toHTML).join('')
+    const html = fruits.map(toHTML)
     document.querySelector('#fruits').innerHTML = html
 }
 
@@ -66,7 +66,8 @@ document.addEventListener('click', event => {
         title: 'Вы уверены?',
         content: `<p>Вы удаляете фрукт : <strong>${fruit.title}</strong></p>`
        }).then(()=>{
-           console.log('Remove')
+            fruits = fruits.filter(f => f.id !==id) 
+            render() 
        }).catch( () => {
         console.log('Cancel')
        })
